@@ -60,7 +60,7 @@ An histogram may now be plotted easily, showing that ,for instance, more than 25
 ```r
 # create histogram of total number of steps in a day
 hist(t.step.per.date$steps, main="Histogram of total number of steps per day", 
-     xlab="Total number of steps in a day", col="green")
+     xlab="Total number of steps in a day", col="yellow")
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
@@ -69,7 +69,7 @@ hist(t.step.per.date$steps, main="Histogram of total number of steps per day",
 # get mean and median total number of steps per day
 avg<-mean(t.step.per.date$steps); med<-median(t.step.per.date$steps)
 ```
-The rounded mean total number of step per day is 1.0766\times 10^{4}, where the median value is 1.0765\times 10^{4}.
+The  mean total number of step per day is 10766.19, where the median value is 10765.
 
 ## Pattern of daily activity
 
@@ -90,7 +90,7 @@ with(t.interval.steps,plot(interval, steps, type='l', col="blue",
 ```r
 peak_hour <- t.interval.steps[which.max(t.interval.steps$steps),1]*24/2400
 ```
-Since the dataset contains 5-minutes interval a total of 288 interval data has been generated (`t.interval.steps`). May be noted that there is a peak at 8.35.
+Since the dataset contains 5-minutes interval a total of 288 interval data has been generated (`t.interval.steps`). It may be noted that there is a peak at 8.35 o'clock.
 
 ## Inputing missing values
 
@@ -177,7 +177,7 @@ mean(t.step.per.date$steps);median(t.step.per.date$steps)
 # convert and format date from string to Date class
 step$date <- as.Date(step$date, "%Y-%m-%d")
 
-# isert a new column indicating daytype (Weekday or Weekend) 
+# insert a new column indicating daytype (Weekday or Weekend) 
 step$day <-  as.factor(ifelse(weekdays(step$date) %in% c("Saturday","Sunday"),  "weekend", "weekday"))
 
 # reaggregate steps as interval to get average number of steps in an interval across all days
@@ -189,4 +189,7 @@ qplot(interval, steps, data=t.interval.step.imputed, geom=c("line"), xlab="Inter
 ```
 
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.png) 
+
+Analysis of day type shows relevant differencies in actiity as follows.
+During **weekdays** the more intense period of acitivties is observed in the morning (between 6.00 and 9.00) with a pek of 250 steps at 8.35. During **weekend days** actiivties are more spread over the dayand the same is for peaks(8.30, 11.00, 16.30, etc).
 
